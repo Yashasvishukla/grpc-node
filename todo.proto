@@ -1,0 +1,23 @@
+syntax = "proto3";
+package todoPackage;
+
+service Todo {
+    rpc createTodo(TodoItem) returns (TodoItem);
+    rpc readTodos(voidNoParams) returns (TodoItems);
+    // We will receive one item at a time so that's the reason we specified the stream type as single item TodoItem
+    rpc readTodosStream(voidNoParams) returns(stream TodoItem);
+}
+
+message voidNoParams
+{}
+
+message TodoItem
+{
+    int32 id = 1;
+    string text = 2;
+
+}
+
+message TodoItems{
+    repeated TodoItem items = 1;
+}
